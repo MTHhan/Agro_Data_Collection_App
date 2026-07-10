@@ -148,24 +148,29 @@
     }
 
     h1 {
-      margin: 0 0 28px;
-      padding: 0.12em 0 0.08em;
+      margin: 0 0 40px;
+      padding: 0.15em 0 0.28em;
       font-family: Syne, "Instrument Sans", "Myanmar Text", "Noto Sans Myanmar", sans-serif;
       font-size: clamp(2.4rem, 8vw, 3.4rem);
       font-weight: 800;
       letter-spacing: -0.03em;
-      line-height: 1.2;
+      line-height: 1.35;
       background: linear-gradient(180deg, #ffffff 20%, var(--primary) 140%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       overflow: visible;
+      display: block;
       animation: rise 0.7s ease-out 0.12s both;
     }
 
     .downloads {
       display: grid;
       gap: 12px;
+      margin-top: 8px;
+      clear: both;
+      position: relative;
+      z-index: 1;
       animation: rise 0.7s ease-out 0.3s both;
     }
 
