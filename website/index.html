@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Agri Data — Myanmar field data collection for AI crop model training">
+  <meta name="description" content="Agri Data — Myanmar field data collection for AI crop model training (Android + Windows)">
   <title>Agri Data — Download</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +18,6 @@
       --text: #e8f5ee;
       --muted: #8aa899;
       --line: rgba(62, 207, 142, 0.22);
-      --danger-soft: #fbbf24;
     }
 
     * {
@@ -76,7 +75,7 @@
 
     .shell {
       width: 100%;
-      max-width: 520px;
+      max-width: 560px;
       text-align: center;
       animation: rise 0.7s ease-out both;
     }
@@ -164,6 +163,12 @@
       animation: rise 0.7s ease-out 0.12s both;
     }
 
+    .downloads {
+      display: grid;
+      gap: 12px;
+      animation: rise 0.7s ease-out 0.3s both;
+    }
+
     .cta {
       display: inline-flex;
       align-items: center;
@@ -182,7 +187,20 @@
       cursor: pointer;
       transition: transform 0.18s ease, filter 0.18s ease, box-shadow 0.18s ease;
       box-shadow: 0 12px 32px rgba(62, 207, 142, 0.28);
-      animation: rise 0.7s ease-out 0.3s both;
+    }
+
+    .cta.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--line);
+      box-shadow: none;
+    }
+
+    .cta.secondary:hover {
+      background: rgba(62, 207, 142, 0.1);
+      border-color: rgba(62, 207, 142, 0.45);
+      filter: none;
+      box-shadow: none;
     }
 
     .cta:hover {
@@ -204,11 +222,15 @@
 
     .meta {
       margin: 14px 0 0;
-      min-height: 2.6em;
+      min-height: 1.4em;
       color: var(--muted);
       font-size: 0.88rem;
       line-height: 1.65;
       animation: rise 0.7s ease-out 0.36s both;
+    }
+
+    .meta + .meta {
+      margin-top: 4px;
     }
 
     .fallback {
@@ -226,14 +248,51 @@
       border-bottom-color: var(--accent);
     }
 
-    .pipeline {
-      margin-top: 34px;
+    .about {
+      margin-top: 28px;
       padding: 18px 16px;
       border: 1px solid var(--line);
       border-radius: 18px;
       background: var(--bg-elevated);
       backdrop-filter: blur(12px);
+      text-align: left;
       animation: rise 0.7s ease-out 0.46s both;
+    }
+
+    .about-title {
+      margin: 0 0 12px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .about p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.8;
+    }
+
+    .about p + p {
+      margin-top: 14px;
+    }
+
+    .about strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .pipeline {
+      margin-top: 22px;
+      padding: 18px 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--bg-elevated);
+      backdrop-filter: blur(12px);
+      animation: rise 0.7s ease-out 0.5s both;
     }
 
     .pipeline-title {
@@ -292,7 +351,7 @@
       color: var(--muted);
       font-size: 0.86rem;
       line-height: 1.75;
-      animation: rise 0.7s ease-out 0.52s both;
+      animation: rise 0.7s ease-out 0.56s both;
     }
 
     .notes strong {
@@ -345,10 +404,16 @@
       <p class="eyebrow">Field data for AI training</p>
       <h1>Agri Data</h1>
 
-      <a id="download-btn" class="cta loading" href="#" aria-disabled="true">
-        Android APK ဒေါင်းလုဒ်
-      </a>
-      <p id="version" class="meta">နောက်ဆုံး version ကို ရှာဖွေနေပါသည်…</p>
+      <div class="downloads">
+        <a id="download-apk" class="cta loading" href="#" aria-disabled="true">
+          Android APK ဒေါင်းလုဒ်
+        </a>
+        <a id="download-desktop" class="cta secondary loading" href="#" aria-disabled="true">
+          Windows Desktop (.exe) ဒေါင်းလုဒ်
+        </a>
+      </div>
+      <p id="version-apk" class="meta">Mobile version ကို ရှာဖွေနေပါသည်…</p>
+      <p id="version-desktop" class="meta">Desktop version ကို ရှာဖွေနေပါသည်…</p>
       <a
         id="releases-link"
         class="fallback"
@@ -358,6 +423,16 @@
       >
         GitHub Releases မှ တိုက်ရိုက် ဒေါင်းလုဒ်
       </a>
+
+      <section class="about" aria-label="App descriptions">
+        <p class="about-title">ရည်ညွှန်းချက်</p>
+        <p>
+          <strong>Agri Data.apk</strong> သည် မြန်မာနိုင်ငံ စိုက်ပျိုးရေး လယ်ကွင်းဒေတာ စုဆောင်းရန် Flutter mobile app ဖြစ်ပါသည်။ ကျောင်းသားများအတွက် အပင်ရောဂါ၊ ပိုးမွှား၊ အာဟာရ ပုံများကို offline ရိုက်ယူပြီး မိမိဖုန်းတွင် သိမ်းဆည်းကာ ရက်အလိုက် ဒေတာပုံများကို သိမ်းဆည်းနိုင်ပါသည်။ အဆိုပါ ဒေတာများကို app တွင် ZIP ဖိုင်ထုတ်၍ ဆရာထံ ပို့ပေးနိုင်ရန် အတွက် ဒီဇိုင်းပြုလုပ်ထားပါသည်။
+        </p>
+        <p>
+          <strong>Agro_Data-Desktop.exe</strong> သည် Desktop App ဖြစ်ပြီး Mobile Phone ရှိ App နှင့် လုပ်ဆောင်ချက်တူညီစွာ လုပ်ဆောင်နိုင်စေရန် ဒီဇိုင်းပြုလုပ်ထားပါသည်။ အဓိကအားဖြင့် IOS အသုံးပြုသော ကျောင်းသားများအနေဖြင့် IOS App မရသေးသည့်အချိန်တွင် Computer ဖြင့် ဒေတာစုဆောင်းမှုများကိုလုပ်ဆောင်နိုင်စေရန် ရည်ရွယ်၍ ဒီဇိုင်းပြုလုပ်ထားခြင်းဖြစ်ပါသည်။
+        </p>
+      </section>
 
       <section class="pipeline" aria-label="AI data pipeline">
         <p class="pipeline-title">AI training data pipeline</p>
@@ -383,9 +458,9 @@
       <section class="notes">
         <strong>Install လုပ်ရန်</strong>
         <ul>
-          <li>Android 7.0 နှင့် အထက် လိုအပ်ပါသည်</li>
-          <li>Unknown apps install ခွင့်ပြုရန် လိုနိုင်ပါသည်</li>
-          <li>ပထမအသုံးပြုရာတွင် Storage / All files access ပေးပါ</li>
+          <li>Android: Android 7.0 နှင့် အထက်၊ Unknown apps install ခွင့်ပြုရန် လိုနိုင်ပါသည်</li>
+          <li>Android: ပထမအသုံးပြုရာတွင် Storage / All files access ပေးပါ</li>
+          <li>Windows: <code>Agro_Data_Desktop.exe</code> ကို ဒေါင်းလုဒ်လုပ်ပြီး run ပါ (SmartScreen သတိပေးနိုင်သည်)</li>
         </ul>
       </section>
     </main>
@@ -394,35 +469,45 @@
   <script>
     const REPO = 'MTHhan/Agro_Data_Collection_App';
     const RELEASES_URL = 'https://github.com/' + REPO + '/releases';
-    const btn = document.getElementById('download-btn');
-    const version = document.getElementById('version');
+    const apkBtn = document.getElementById('download-apk');
+    const desktopBtn = document.getElementById('download-desktop');
+    const apkMeta = document.getElementById('version-apk');
+    const desktopMeta = document.getElementById('version-desktop');
 
-    function enableDownload(url, label) {
+    function enableButton(btn, meta, url, label) {
       btn.href = url;
       btn.classList.remove('loading');
       btn.removeAttribute('aria-disabled');
-      version.textContent = label;
+      meta.textContent = label;
     }
 
-    function showError(message) {
+    function failButton(btn, meta, message) {
       btn.classList.remove('loading');
       btn.href = RELEASES_URL;
-      btn.textContent = 'GitHub Releases သို့ သွားမည်';
       btn.removeAttribute('aria-disabled');
-      version.textContent = message;
+      meta.textContent = message;
     }
 
-    function pickApkRelease(releases) {
+    function findAsset(assets, matcher) {
+      return (assets || []).find(function (asset) {
+        return asset.name && matcher(asset.name.toLowerCase());
+      });
+    }
+
+    function pickReleaseAssets(releases) {
       if (!Array.isArray(releases)) return null;
       for (var i = 0; i < releases.length; i++) {
         var release = releases[i];
         if (release.draft) continue;
         var assets = release.assets || [];
-        var apk = assets.find(function (asset) {
-          return asset.name && asset.name.toLowerCase().endsWith('.apk');
+        var apk = findAsset(assets, function (name) {
+          return name.endsWith('.apk');
         });
-        if (apk) {
-          return { release: release, apk: apk };
+        var desktop = findAsset(assets, function (name) {
+          return name.endsWith('.exe') || name.indexOf('desktop') !== -1;
+        });
+        if (apk || desktop) {
+          return { release: release, apk: apk || null, desktop: desktop || null };
         }
       }
       return null;
@@ -438,20 +523,46 @@
         return response.json();
       })
       .then(function (releases) {
-        var picked = pickApkRelease(releases);
+        var picked = pickReleaseAssets(releases);
         if (!picked) {
-          showError('Release တွင် APK မတွေ့ပါ။ GitHub Releases မှ ဒေါင်းလုဒ်လုပ်ပါ။');
+          failButton(apkBtn, apkMeta, 'Release assets မတွေ့ပါ။ GitHub Releases မှ ဒေါင်းလုဒ်လုပ်ပါ။');
+          failButton(desktopBtn, desktopMeta, 'Release assets မတွေ့ပါ။ GitHub Releases မှ ဒေါင်းလုဒ်လုပ်ပါ။');
+          apkBtn.textContent = 'GitHub Releases သို့ သွားမည်';
+          desktopBtn.textContent = 'GitHub Releases သို့ သွားမည်';
           return;
         }
 
         var tag = picked.release.tag_name || 'latest';
-        enableDownload(
-          picked.apk.browser_download_url,
-          'Version ' + tag + ' · ' + picked.apk.name
-        );
+
+        if (picked.apk) {
+          enableButton(
+            apkBtn,
+            apkMeta,
+            picked.apk.browser_download_url,
+            'Mobile · Version ' + tag + ' · ' + picked.apk.name
+          );
+        } else {
+          failButton(apkBtn, apkMeta, 'APK မတွေ့ပါ။ GitHub Releases မှ ဒေါင်းလုဒ်လုပ်ပါ။');
+          apkBtn.textContent = 'GitHub Releases သို့ သွားမည်';
+        }
+
+        if (picked.desktop) {
+          enableButton(
+            desktopBtn,
+            desktopMeta,
+            picked.desktop.browser_download_url,
+            'Desktop · Version ' + tag + ' · ' + picked.desktop.name
+          );
+        } else {
+          failButton(desktopBtn, desktopMeta, 'Desktop .exe မတွေ့ပါ။ GitHub Releases မှ ဒေါင်းလုဒ်လုပ်ပါ။');
+          desktopBtn.textContent = 'GitHub Releases သို့ သွားမည်';
+        }
       })
       .catch(function () {
-        showError('Version အလိုအလျောက် မရပါ။ အောက်ပါ GitHub Releases link ကို သုံးပါ။');
+        failButton(apkBtn, apkMeta, 'Version အလိုအလျောက် မရပါ။ GitHub Releases link ကို သုံးပါ။');
+        failButton(desktopBtn, desktopMeta, 'Version အလိုအလျောက် မရပါ။ GitHub Releases link ကို သုံးပါ။');
+        apkBtn.textContent = 'GitHub Releases သို့ သွားမည်';
+        desktopBtn.textContent = 'GitHub Releases သို့ သွားမည်';
       });
   </script>
 </body>
