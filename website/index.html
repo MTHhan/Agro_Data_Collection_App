@@ -148,30 +148,42 @@
     }
 
     h1 {
-      margin: 0 0 40px;
-      padding: 0.15em 0 0.28em;
-      font-family: Syne, "Instrument Sans", "Myanmar Text", "Noto Sans Myanmar", sans-serif;
+      margin: 0;
+      padding: 0.2em 0 0.35em;
+      font-family: Syne, "Instrument Sans", sans-serif;
       font-size: clamp(2.4rem, 8vw, 3.4rem);
       font-weight: 800;
       letter-spacing: -0.03em;
-      line-height: 1.35;
-      background: linear-gradient(180deg, #ffffff 20%, var(--primary) 140%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      line-height: 1.45;
+      color: #eaf8f0;
+      /* Avoid background-clip:text — it clips Syne descenders (e.g. letter g) */
       overflow: visible;
       display: block;
-      animation: rise 0.7s ease-out 0.12s both;
+      animation: fade-in 0.7s ease-out 0.12s both;
+    }
+
+    .title-block {
+      margin: 0 0 36px;
+      padding-bottom: 12px;
+      overflow: visible;
     }
 
     .downloads {
       display: grid;
       gap: 12px;
-      margin-top: 8px;
-      clear: both;
+      margin-top: 0;
       position: relative;
-      z-index: 1;
-      animation: rise 0.7s ease-out 0.3s both;
+      z-index: 0;
+      animation: fade-in 0.7s ease-out 0.3s both;
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
 
     .cta {
@@ -405,7 +417,9 @@
       </div>
 
       <p class="eyebrow">Field data for AI training</p>
-      <h1>Agri Data</h1>
+      <div class="title-block">
+        <h1>Agri Data</h1>
+      </div>
 
       <div class="downloads">
         <a id="download-apk" class="cta loading" href="#" aria-disabled="true">
