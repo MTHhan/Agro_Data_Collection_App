@@ -263,37 +263,78 @@
 
     .about {
       margin-top: 28px;
-      padding: 18px 16px;
       border: 1px solid var(--line);
       border-radius: 18px;
       background: var(--bg-elevated);
       backdrop-filter: blur(12px);
       text-align: left;
-      animation: rise 0.7s ease-out 0.46s both;
+      animation: fade-in 0.7s ease-out 0.46s both;
+      overflow: hidden;
     }
 
-    .about-title {
-      margin: 0 0 12px;
+    .about-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      margin: 0;
+      padding: 14px 16px;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font-family: inherit;
       font-size: 0.78rem;
       font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: var(--muted);
-      text-align: center;
+      cursor: pointer;
     }
 
-    .about p {
-      margin: 0;
+    .about-toggle:hover {
+      color: var(--text);
+    }
+
+    .about-toggle .arrow {
+      display: inline-flex;
+      width: 22px;
+      height: 22px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      color: var(--accent);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .about-toggle .arrow svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .about.is-open .about-toggle .arrow {
+      transform: rotate(180deg);
+      background: rgba(62, 207, 142, 0.12);
+    }
+
+    .about-panel {
+      display: none;
+      padding: 0 16px 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .about.is-open .about-panel {
+      display: block;
+    }
+
+    .about-panel p {
+      margin: 14px 0 0;
       color: var(--muted);
       font-size: 0.9rem;
       line-height: 1.8;
     }
 
-    .about p + p {
-      margin-top: 14px;
-    }
-
-    .about strong {
+    .about-panel strong {
       color: var(--text);
       font-weight: 600;
     }
@@ -453,14 +494,29 @@
         GitHub Releases မှ တိုက်ရိုက် ဒေါင်းလုဒ်
       </a>
 
-      <section class="about" aria-label="App descriptions">
-        <p class="about-title">ရည်ညွှန်းချက်</p>
-        <p>
-          <strong>Agri Data.apk</strong> သည် မြန်မာနိုင်ငံ စိုက်ပျိုးရေး လယ်ကွင်းဒေတာ စုဆောင်းရန် Flutter mobile app ဖြစ်ပါသည်။ ကျောင်းသားများအတွက် အပင်ရောဂါ၊ ပိုးမွှား၊ အာဟာရ ပုံများကို offline ရိုက်ယူပြီး မိမိဖုန်းတွင် သိမ်းဆည်းကာ ရက်အလိုက် ဒေတာပုံများကို သိမ်းဆည်းနိုင်ပါသည်။ အဆိုပါ ဒေတာများကို app တွင် ZIP ဖိုင်ထုတ်၍ ဆရာထံ ပို့ပေးနိုင်ရန် အတွက် ဒီဇိုင်းပြုလုပ်ထားပါသည်။
-        </p>
-        <p>
-          <strong>Agro_Data-Desktop.exe</strong> သည် Desktop App ဖြစ်ပြီး Mobile Phone ရှိ App နှင့် လုပ်ဆောင်ချက်တူညီစွာ လုပ်ဆောင်နိုင်စေရန် ဒီဇိုင်းပြုလုပ်ထားပါသည်။ အဓိကအားဖြင့် IOS အသုံးပြုသော ကျောင်းသားများအနေဖြင့် IOS App မရသေးသည့်အချိန်တွင် Computer ဖြင့် ဒေတာစုဆောင်းမှုများကိုလုပ်ဆောင်နိုင်စေရန် ရည်ရွယ်၍ ဒီဇိုင်းပြုလုပ်ထားခြင်းဖြစ်ပါသည်။
-        </p>
+      <section class="about" id="about-section" aria-label="App descriptions">
+        <button
+          type="button"
+          class="about-toggle"
+          id="about-toggle"
+          aria-expanded="false"
+          aria-controls="about-panel"
+        >
+          <span>ရည်ညွှန်းချက်</span>
+          <span class="arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </span>
+        </button>
+        <div class="about-panel" id="about-panel" hidden>
+          <p>
+            <strong>Agri Data.apk</strong> သည် မြန်မာနိုင်ငံ စိုက်ပျိုးရေး လယ်ကွင်းဒေတာ စုဆောင်းရန် Flutter mobile app ဖြစ်ပါသည်။ ကျောင်းသားများအတွက် အပင်ရောဂါ၊ ပိုးမွှား၊ အာဟာရ ပုံများကို offline ရိုက်ယူပြီး မိမိဖုန်းတွင် သိမ်းဆည်းကာ ရက်အလိုက် ဒေတာပုံများကို သိမ်းဆည်းနိုင်ပါသည်။ အဆိုပါ ဒေတာများကို app တွင် ZIP ဖိုင်ထုတ်၍ ဆရာထံ ပို့ပေးနိုင်ရန် အတွက် ဒီဇိုင်းပြုလုပ်ထားပါသည်။
+          </p>
+          <p>
+            <strong>Agro_Data-Desktop.exe</strong> သည် Desktop App ဖြစ်ပြီး Mobile Phone ရှိ App နှင့် လုပ်ဆောင်ချက်တူညီစွာ လုပ်ဆောင်နိုင်စေရန် ဒီဇိုင်းပြုလုပ်ထားပါသည်။ အဓိကအားဖြင့် IOS အသုံးပြုသော ကျောင်းသားများအနေဖြင့် IOS App မရသေးသည့်အချိန်တွင် Computer ဖြင့် ဒေတာစုဆောင်းမှုများကိုလုပ်ဆောင်နိုင်စေရန် ရည်ရွယ်၍ ဒီဇိုင်းပြုလုပ်ထားခြင်းဖြစ်ပါသည်။
+          </p>
+        </div>
       </section>
 
       <section class="pipeline" aria-label="AI data pipeline">
@@ -502,6 +558,21 @@
     const desktopBtn = document.getElementById('download-desktop');
     const apkMeta = document.getElementById('version-apk');
     const desktopMeta = document.getElementById('version-desktop');
+    const aboutSection = document.getElementById('about-section');
+    const aboutToggle = document.getElementById('about-toggle');
+    const aboutPanel = document.getElementById('about-panel');
+
+    if (aboutToggle && aboutSection && aboutPanel) {
+      aboutToggle.addEventListener('click', function () {
+        var open = aboutSection.classList.toggle('is-open');
+        aboutToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) {
+          aboutPanel.removeAttribute('hidden');
+        } else {
+          aboutPanel.setAttribute('hidden', '');
+        }
+      });
+    }
 
     function enableButton(btn, meta, url, label) {
       btn.href = url;
