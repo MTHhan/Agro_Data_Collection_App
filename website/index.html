@@ -7,7 +7,7 @@
   <title>Agri Data — Download</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #07110c;
@@ -28,13 +28,17 @@
     body {
       margin: 0;
       min-height: 100%;
+      overflow-x: clip;
+      overflow-y: visible;
     }
 
     body {
       font-family: "Instrument Sans", "Myanmar Text", "Noto Sans Myanmar", "Padauk", system-ui, sans-serif;
       color: var(--text);
       background: var(--bg);
-      overflow-x: hidden;
+      /* overflow-x:hidden on body can clip glyph descenders in some browsers */
+      overflow-x: clip;
+      overflow-y: visible;
       line-height: 1.6;
     }
 
@@ -149,23 +153,24 @@
 
     h1 {
       margin: 0;
-      padding: 0.2em 0 0.35em;
-      font-family: Syne, "Instrument Sans", sans-serif;
+      padding: 0.25em 0 0.55em;
+      font-family: "Instrument Sans", system-ui, sans-serif;
       font-size: clamp(2.4rem, 8vw, 3.4rem);
-      font-weight: 800;
+      font-weight: 700;
       letter-spacing: -0.03em;
-      line-height: 1.45;
+      line-height: 1.7;
       color: #eaf8f0;
-      /* Avoid background-clip:text — it clips Syne descenders (e.g. letter g) */
       overflow: visible;
-      display: block;
+      display: inline-block;
+      max-width: 100%;
       animation: fade-in 0.7s ease-out 0.12s both;
     }
 
     .title-block {
-      margin: 0 0 36px;
-      padding-bottom: 12px;
+      margin: 0 0 28px;
+      padding: 8px 0 16px;
       overflow: visible;
+      line-height: normal;
     }
 
     .downloads {
@@ -338,7 +343,7 @@
     .steps .num {
       display: block;
       margin-bottom: 6px;
-      font-family: Syne, sans-serif;
+      font-family: "Instrument Sans", sans-serif;
       font-size: 0.85rem;
       font-weight: 700;
       color: var(--primary);
