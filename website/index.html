@@ -32,10 +32,11 @@
     }
 
     body {
-      font-family: "Instrument Sans", system-ui, sans-serif;
+      font-family: "Instrument Sans", "Myanmar Text", "Noto Sans Myanmar", "Padauk", system-ui, sans-serif;
       color: var(--text);
       background: var(--bg);
       overflow-x: hidden;
+      line-height: 1.6;
     }
 
     .scene {
@@ -148,24 +149,27 @@
     }
 
     h1 {
-      margin: 0 0 12px;
-      font-family: Syne, "Instrument Sans", sans-serif;
+      margin: 0 0 22px;
+      padding: 0.12em 0 0.08em;
+      font-family: Syne, "Instrument Sans", "Myanmar Text", "Noto Sans Myanmar", sans-serif;
       font-size: clamp(2.4rem, 8vw, 3.4rem);
       font-weight: 800;
       letter-spacing: -0.03em;
-      line-height: 1.05;
+      line-height: 1.2;
       background: linear-gradient(180deg, #ffffff 20%, var(--primary) 140%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+      overflow: visible;
       animation: rise 0.7s ease-out 0.12s both;
     }
 
     .headline {
-      margin: 0 0 10px;
-      font-size: clamp(1.05rem, 3.4vw, 1.25rem);
+      margin: 0 0 14px;
+      padding-top: 4px;
+      font-size: clamp(1.05rem, 3.4vw, 1.2rem);
       font-weight: 600;
-      line-height: 1.4;
+      line-height: 1.75;
       color: var(--text);
       animation: rise 0.7s ease-out 0.18s both;
     }
@@ -174,7 +178,7 @@
       margin: 0 0 28px;
       color: var(--muted);
       font-size: 0.98rem;
-      line-height: 1.6;
+      line-height: 1.8;
       animation: rise 0.7s ease-out 0.24s both;
     }
 
@@ -289,15 +293,15 @@
       font-size: 0.82rem;
       font-weight: 600;
       color: var(--text);
-      line-height: 1.35;
+      line-height: 1.5;
     }
 
     .steps .sub {
       display: block;
-      margin-top: 4px;
+      margin-top: 6px;
       font-size: 0.72rem;
       color: var(--muted);
-      line-height: 1.35;
+      line-height: 1.65;
     }
 
     .notes {
@@ -305,7 +309,7 @@
       text-align: left;
       color: var(--muted);
       font-size: 0.86rem;
-      line-height: 1.55;
+      line-height: 1.75;
       animation: rise 0.7s ease-out 0.52s both;
     }
 
