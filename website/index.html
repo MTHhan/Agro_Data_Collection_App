@@ -73,7 +73,7 @@
         linear-gradient(rgba(62, 207, 142, 0.05) 1px, transparent 1px),
         linear-gradient(90deg, rgba(62, 207, 142, 0.05) 1px, transparent 1px);
       background-size: 48px 48px;
-      mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
+      opacity: 0.85;
       pointer-events: none;
     }
 
@@ -81,18 +81,7 @@
       width: 100%;
       max-width: 560px;
       text-align: center;
-      animation: rise 0.7s ease-out both;
-    }
-
-    @keyframes rise {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      animation: fade-in 0.7s ease-out both;
     }
 
     @keyframes pulse-ring {
@@ -151,26 +140,31 @@
       box-shadow: 0 0 10px var(--primary);
     }
 
-    h1 {
-      margin: 0;
-      padding: 0.25em 0 0.55em;
-      font-family: "Instrument Sans", system-ui, sans-serif;
-      font-size: clamp(2.4rem, 8vw, 3.4rem);
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1.7;
-      color: #eaf8f0;
-      overflow: visible;
-      display: inline-block;
-      max-width: 100%;
-      animation: fade-in 0.7s ease-out 0.12s both;
-    }
-
     .title-block {
       margin: 0 0 28px;
-      padding: 8px 0 16px;
+      padding: 0;
       overflow: visible;
-      line-height: normal;
+      line-height: 0;
+    }
+
+    .title-block .brand-title {
+      display: block;
+      width: min(100%, 420px);
+      height: auto;
+      margin: 0 auto;
+      overflow: visible;
+    }
+
+    .title-block .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
     .downloads {
@@ -423,7 +417,20 @@
 
       <p class="eyebrow">Field data for AI training</p>
       <div class="title-block">
-        <h1>Agri Data</h1>
+        <h1 class="visually-hidden">Agri Data</h1>
+        <!-- SVG title avoids webfont descender clipping (letter g) -->
+        <svg class="brand-title" viewBox="0 0 520 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+          <text
+            x="260"
+            y="95"
+            text-anchor="middle"
+            fill="#eaf8f0"
+            font-size="72"
+            font-weight="700"
+            font-family="Segoe UI, Arial, Helvetica, sans-serif"
+            letter-spacing="-1.5"
+          >Agri Data</text>
+        </svg>
       </div>
 
       <div class="downloads">
