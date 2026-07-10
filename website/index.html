@@ -261,18 +261,22 @@
       border-bottom-color: var(--accent);
     }
 
-    .about {
-      margin-top: 28px;
+    .fold {
+      margin-top: 22px;
       border: 1px solid var(--line);
       border-radius: 18px;
       background: var(--bg-elevated);
       backdrop-filter: blur(12px);
       text-align: left;
-      animation: fade-in 0.7s ease-out 0.46s both;
       overflow: hidden;
+      animation: fade-in 0.7s ease-out 0.46s both;
     }
 
-    .about-toggle {
+    .fold + .fold {
+      animation-delay: 0.5s;
+    }
+
+    .fold-toggle {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -291,11 +295,11 @@
       cursor: pointer;
     }
 
-    .about-toggle:hover {
+    .fold-toggle:hover {
       color: var(--text);
     }
 
-    .about-toggle .arrow {
+    .fold-toggle .arrow {
       display: inline-flex;
       width: 22px;
       height: 22px;
@@ -307,55 +311,36 @@
       transition: transform 0.2s ease, background 0.2s ease;
     }
 
-    .about-toggle .arrow svg {
+    .fold-toggle .arrow svg {
       width: 14px;
       height: 14px;
     }
 
-    .about.is-open .about-toggle .arrow {
+    .fold.is-open .fold-toggle .arrow {
       transform: rotate(180deg);
       background: rgba(62, 207, 142, 0.12);
     }
 
-    .about-panel {
+    .fold-panel {
       display: none;
       padding: 0 16px 18px;
       border-top: 1px solid var(--line);
     }
 
-    .about.is-open .about-panel {
+    .fold.is-open .fold-panel {
       display: block;
     }
 
-    .about-panel p {
+    .fold-panel p {
       margin: 14px 0 0;
       color: var(--muted);
       font-size: 0.9rem;
       line-height: 1.8;
     }
 
-    .about-panel strong {
+    .fold-panel strong {
       color: var(--text);
       font-weight: 600;
-    }
-
-    .pipeline {
-      margin-top: 22px;
-      padding: 18px 16px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: var(--bg-elevated);
-      backdrop-filter: blur(12px);
-      animation: fade-in 0.7s ease-out 0.5s both;
-    }
-
-    .pipeline-title {
-      margin: 0 0 14px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
     }
 
     .steps {
@@ -363,7 +348,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 10px;
       list-style: none;
-      margin: 0;
+      margin: 14px 0 0;
       padding: 0;
     }
 
@@ -372,6 +357,7 @@
       border-radius: 12px;
       background: rgba(7, 17, 12, 0.55);
       border: 1px solid rgba(62, 207, 142, 0.12);
+      text-align: center;
     }
 
     .steps .num {
@@ -399,27 +385,21 @@
       line-height: 1.65;
     }
 
-    .notes {
-      margin-top: 22px;
-      text-align: left;
+    .fold-panel ul {
+      margin: 14px 0 0;
+      padding-left: 18px;
       color: var(--muted);
       font-size: 0.86rem;
       line-height: 1.75;
-      animation: fade-in 0.7s ease-out 0.56s both;
     }
 
-    .notes strong {
-      color: var(--text);
-      font-weight: 600;
-    }
-
-    .notes ul {
-      margin: 10px 0 0;
-      padding-left: 18px;
-    }
-
-    .notes li + li {
+    .fold-panel li + li {
       margin-top: 8px;
+    }
+
+    .fold-panel code {
+      color: var(--accent);
+      font-size: 0.84em;
     }
 
     @media (max-width: 420px) {
@@ -494,10 +474,10 @@
         GitHub Releases မှ တိုက်ရိုက် ဒေါင်းလုဒ်
       </a>
 
-      <section class="about" id="about-section" aria-label="App descriptions">
+      <section class="fold" id="about-section" aria-label="App descriptions">
         <button
           type="button"
-          class="about-toggle"
+          class="fold-toggle"
           id="about-toggle"
           aria-expanded="false"
           aria-controls="about-panel"
@@ -509,7 +489,7 @@
             </svg>
           </span>
         </button>
-        <div class="about-panel" id="about-panel" hidden>
+        <div class="fold-panel" id="about-panel" hidden>
           <p>
             <strong>Agri Data.apk</strong> သည် မြန်မာနိုင်ငံ စိုက်ပျိုးရေး လယ်ကွင်းဒေတာ စုဆောင်းရန် Flutter mobile app ဖြစ်ပါသည်။ ကျောင်းသားများအတွက် အပင်ရောဂါ၊ ပိုးမွှား၊ အာဟာရ ပုံများကို offline ရိုက်ယူပြီး မိမိဖုန်းတွင် သိမ်းဆည်းကာ ရက်အလိုက် ဒေတာပုံများကို သိမ်းဆည်းနိုင်ပါသည်။ အဆိုပါ ဒေတာများကို app တွင် ZIP ဖိုင်ထုတ်၍ ဆရာထံ ပို့ပေးနိုင်ရန် အတွက် ဒီဇိုင်းပြုလုပ်ထားပါသည်။
           </p>
@@ -519,34 +499,64 @@
         </div>
       </section>
 
-      <section class="pipeline" aria-label="AI data pipeline">
-        <p class="pipeline-title">AI training data pipeline</p>
-        <ol class="steps">
-          <li>
-            <span class="num">01</span>
-            <span class="label">Collect</span>
-            <span class="sub">လယ်ကွင်းတွင် ပုံရိုက်စုဆောင်း</span>
-          </li>
-          <li>
-            <span class="num">02</span>
-            <span class="label">Organize</span>
-            <span class="sub">ရက်အလိုက် စီစစ် / ZIP ထုတ်</span>
-          </li>
-          <li>
-            <span class="num">03</span>
-            <span class="label">Train</span>
-            <span class="sub">AI model လေ့ကျင့်ရန် သုံးမည်</span>
-          </li>
-        </ol>
+      <section class="fold" id="pipeline-section" aria-label="AI data pipeline">
+        <button
+          type="button"
+          class="fold-toggle"
+          id="pipeline-toggle"
+          aria-expanded="false"
+          aria-controls="pipeline-panel"
+        >
+          <span>AI training data pipeline</span>
+          <span class="arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </span>
+        </button>
+        <div class="fold-panel" id="pipeline-panel" hidden>
+          <ol class="steps">
+            <li>
+              <span class="num">01</span>
+              <span class="label">Collect</span>
+              <span class="sub">လယ်ကွင်းတွင် ပုံရိုက်စုဆောင်း</span>
+            </li>
+            <li>
+              <span class="num">02</span>
+              <span class="label">Organize</span>
+              <span class="sub">ရက်အလိုက် စီစစ် / ZIP ထုတ်</span>
+            </li>
+            <li>
+              <span class="num">03</span>
+              <span class="label">Train</span>
+              <span class="sub">AI model လေ့ကျင့်ရန် သုံးမည်</span>
+            </li>
+          </ol>
+        </div>
       </section>
 
-      <section class="notes">
-        <strong>Install လုပ်ရန်</strong>
-        <ul>
-          <li>Android: Android 7.0 နှင့် အထက်၊ Unknown apps install ခွင့်ပြုရန် လိုနိုင်ပါသည်</li>
-          <li>Android: ပထမအသုံးပြုရာတွင် Storage / All files access ပေးပါ</li>
-          <li>Windows: <code>Agro_Data_Desktop.exe</code> ကို ဒေါင်းလုဒ်လုပ်ပြီး run ပါ (SmartScreen သတိပေးပါက info ကိုနှိပ်ပြီး Run Any Way ခလုပ်ကိုနှိပ်၍ App ကို Run နိုင်ပါသည်။)</li>
-        </ul>
+      <section class="fold" id="install-section" aria-label="Install guide">
+        <button
+          type="button"
+          class="fold-toggle"
+          id="install-toggle"
+          aria-expanded="false"
+          aria-controls="install-panel"
+        >
+          <span>Install လုပ်ရန်</span>
+          <span class="arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </span>
+        </button>
+        <div class="fold-panel" id="install-panel" hidden>
+          <ul>
+            <li>Android: Android 7.0 နှင့် အထက်၊ Unknown apps install ခွင့်ပြုရန် လိုနိုင်ပါသည်</li>
+            <li>Android: ပထမအသုံးပြုရာတွင် Storage / All files access ပေးပါ</li>
+            <li>Windows: <code>Agro_Data_Desktop.exe</code> ကို ဒေါင်းလုဒ်လုပ်ပြီး run ပါ (SmartScreen သတိပေးပါက info ကိုနှိပ်ပြီး Run Any Way ခလုပ်ကိုနှိပ်၍ App ကို Run နိုင်ပါသည်။)</li>
+          </ul>
+        </div>
       </section>
     </main>
   </div>
@@ -562,17 +572,30 @@
     const aboutToggle = document.getElementById('about-toggle');
     const aboutPanel = document.getElementById('about-panel');
 
-    if (aboutToggle && aboutSection && aboutPanel) {
-      aboutToggle.addEventListener('click', function () {
-        var open = aboutSection.classList.toggle('is-open');
-        aboutToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    function bindFold(section, toggle, panel) {
+      if (!section || !toggle || !panel) return;
+      toggle.addEventListener('click', function () {
+        var open = section.classList.toggle('is-open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
         if (open) {
-          aboutPanel.removeAttribute('hidden');
+          panel.removeAttribute('hidden');
         } else {
-          aboutPanel.setAttribute('hidden', '');
+          panel.setAttribute('hidden', '');
         }
       });
     }
+
+    bindFold(aboutSection, aboutToggle, aboutPanel);
+    bindFold(
+      document.getElementById('pipeline-section'),
+      document.getElementById('pipeline-toggle'),
+      document.getElementById('pipeline-panel')
+    );
+    bindFold(
+      document.getElementById('install-section'),
+      document.getElementById('install-toggle'),
+      document.getElementById('install-panel')
+    );
 
     function enableButton(btn, meta, url, label) {
       btn.href = url;
