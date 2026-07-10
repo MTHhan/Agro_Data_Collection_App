@@ -1,0 +1,8 @@
+{
+  // Cloudflare Workers Static Assets — serves website/ folder (index.html + download button)
+  "name": "agri-data-collect",
+  "compatibility_date": "2026-07-10",
+  "assets": {
+    "directory": "./website"
+  }
+}

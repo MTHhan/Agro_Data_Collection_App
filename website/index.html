@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Agri Field Intel — Myanmar crop field data collection app for Android">
+  <title>Agri Field Intel — Download</title>
+  <style>
+    :root {
+      --primary: #2b7c5d;
+      --primary-dark: #1f5c44;
+      --bg: #f8faf6;
+      --card: #ffffff;
+      --text: #1a2e1a;
+      --muted: #5a6b5a;
+      --border: #d8e6dc;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(43, 124, 93, 0.12), transparent 42%),
+        var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 440px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 24px 24px;
+      box-shadow: 0 10px 40px rgba(26, 46, 26, 0.08);
+      text-align: center;
+    }
+
+    .logo {
+      width: 88px;
+      height: 88px;
+      margin: 0 auto 16px;
+      border-radius: 22px;
+      background: linear-gradient(145deg, #e8f3ec, #ffffff);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      font-size: 42px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 1.6rem;
+      line-height: 1.25;
+    }
+
+    .subtitle {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.55;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 15px 20px;
+      border: 0;
+      border-radius: 12px;
+      background: var(--primary);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn:active {
+      transform: scale(0.99);
+    }
+
+    .btn[disabled],
+    .btn.loading {
+      opacity: 0.72;
+      pointer-events: none;
+    }
+
+    .meta {
+      margin-top: 14px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.5;
+      min-height: 2.8em;
+    }
+
+    .notes {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      text-align: left;
+      font-size: 0.86rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .notes strong {
+      color: var(--text);
+    }
+
+    .notes ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+    }
+
+    .fallback {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 0.84rem;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .fallback:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="logo" aria-hidden="true">🌾</div>
+    <h1>Agri Field Intel</h1>
+    <p class="subtitle">
+      Myanmar crop field data collection app<br>
+      Android APK ဒေါင်းလုဒ်
+    </p>
+
+    <a id="download-btn" class="btn loading" href="#" aria-disabled="true">
+      Android APK ဒေါင်းလုဒ်
+    </a>
+
+    <p id="version" class="meta">နောက်ဆုံး version ကို ရှာဖွေနေပါသည်…</p>
+
+    <a
+      id="releases-link"
+      class="fallback"
+      href="https://github.com/MTHhan/Agro_Data_Collection_App/releases"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      GitHub Releases မှ တိုက်ရိုက် ဒေါင်းလုဒ်
+    </a>
+
+    <section class="notes">
+      <strong>Install လုပ်ရန်</strong>
+      <ul>
+        <li>Android 7.0 နှင့် အထက် လိုအပ်ပါသည်</li>
+        <li>Unknown apps install ခွင့်ပြုရန် လိုနိုင်ပါသည်</li>
+        <li>ပထမအသုံးပြုရာတွင် Storage / All files access ပေးပါ</li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    // Exact GitHub owner casing; /releases (not /latest) so pre-releases work too
+    const REPO = 'MTHhan/Agro_Data_Collection_App';
+    const RELEASES_URL = 'https://github.com/' + REPO + '/releases';
+    const btn = document.getElementById('download-btn');
+    const version = document.getElementById('version');
+
+    function enableDownload(url, label) {
+      btn.href = url;
+      btn.classList.remove('loading');
+      btn.removeAttribute('aria-disabled');
+      version.textContent = label;
+    }
+
+    function showError(message) {
+      btn.classList.remove('loading');
+      btn.href = RELEASES_URL;
+      btn.textContent = 'GitHub Releases သို့ သွားမည်';
+      btn.removeAttribute('aria-disabled');
+      version.textContent = message;
+    }
+
+    function pickApkRelease(releases) {
+      if (!Array.isArray(releases)) return null;
+      for (var i = 0; i < releases.length; i++) {
+        var release = releases[i];
+        if (release.draft) continue;
+        var assets = release.assets || [];
+        var apk = assets.find(function (asset) {
+          return asset.name && asset.name.toLowerCase().endsWith('.apk');
+        });
+        if (apk) {
+          return { release: release, apk: apk };
+        }
+      }
+      return null;
+    }
+
+    fetch('https://api.github.com/repos/' + REPO + '/releases?per_page=10', {
+      headers: { Accept: 'application/vnd.github+json' },
+    })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error('Release API failed: ' + response.status);
+        }
+        return response.json();
+      })
+      .then(function (releases) {
+        var picked = pickApkRelease(releases);
+        if (!picked) {
+          showError('Release တွင် APK မတွေ့ပါ။ GitHub Releases မှ ဒေါင်းလုဒ်လုပ်ပါ။');
+          return;
+        }
+
+        var tag = picked.release.tag_name || 'latest';
+        enableDownload(
+          picked.apk.browser_download_url,
+          'Version ' + tag + ' · ' + picked.apk.name
+        );
+      })
+      .catch(function () {
+        showError('Version အလိုအလျောက် မရပါ။ အောက်ပါ GitHub Releases link ကို သုံးပါ။');
+      });
+  </script>
+</body>
+</html>
