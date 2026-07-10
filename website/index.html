@@ -240,17 +240,30 @@
 
     .title-block {
       margin: 0 0 22px;
-      padding: 4px 0 8px;
+      padding: 4px 8px 10px;
       overflow: visible;
+      width: 100%;
     }
 
     .title-block .brand-title {
-      display: block;
+      margin: 0;
+      padding: 0.15em 0 0.25em;
       width: 100%;
-      max-width: 440px;
-      height: auto;
-      margin: 0 auto;
+      max-width: 100%;
+      font-family: "Instrument Sans", "Segoe UI", Arial, sans-serif;
+      font-size: clamp(1.55rem, 7.2vw, 2.75rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.25;
+      color: #eaf8f0;
       overflow: visible;
+      word-wrap: break-word;
+      overflow-wrap: anywhere;
+      hyphens: auto;
+    }
+
+    .title-block .brand-title .line {
+      display: block;
     }
 
     .downloads {
@@ -532,6 +545,16 @@
         opacity: 0.72;
       }
 
+      .title-block {
+        padding-left: 4px;
+        padding-right: 4px;
+      }
+
+      .title-block .brand-title {
+        font-size: clamp(1.45rem, 8vw, 2rem);
+        line-height: 1.3;
+      }
+
       .eyebrow {
         font-size: 0.68rem;
         padding: 5px 10px;
@@ -690,32 +713,10 @@
 
       <p class="eyebrow">Field data for AI training</p>
       <div class="title-block">
-        <h1 class="visually-hidden">Agri Data Collection App</h1>
-        <!-- SVG title avoids webfont descender clipping (letter g) -->
-        <svg class="brand-title" viewBox="0 0 560 180" overflow="visible" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
-          <text
-            x="280"
-            y="72"
-            text-anchor="middle"
-            dominant-baseline="alphabetic"
-            fill="#eaf8f0"
-            font-size="58"
-            font-weight="700"
-            font-family="Segoe UI, Arial, Helvetica, sans-serif"
-            letter-spacing="-1.2"
-          >Agri Data</text>
-          <text
-            x="280"
-            y="138"
-            text-anchor="middle"
-            dominant-baseline="alphabetic"
-            fill="#eaf8f0"
-            font-size="46"
-            font-weight="700"
-            font-family="Segoe UI, Arial, Helvetica, sans-serif"
-            letter-spacing="-1"
-          >Collection App</text>
-        </svg>
+        <h1 class="brand-title">
+          <span class="line">Agri Data</span>
+          <span class="line">Collection App</span>
+        </h1>
       </div>
 
       <div class="downloads">
