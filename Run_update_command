@@ -1,0 +1,16 @@
+cd D:\New_Data_Collect\Agro_Data_Collection_App
+
+git add website/index.html
+git commit -m "Update website"
+git push origin main
+
+# ကျောင်းသားများကို ပေးရမည့် လင့် (ဖုန်း timeout ကာကွယ်ရန်):
+# https://mthhan.github.io/Agro_Data_Collection_App/
+#
+# workers.dev ကို ကျောင်းသားများကို မပေးပါနှင့်။
+
+wrangler.jsonc လည်း ပြင်ထားရင်:
+
+git add website wrangler.jsonc
+git commit -m "Update website"
+git push origin main
