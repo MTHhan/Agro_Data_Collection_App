@@ -234,48 +234,6 @@
       box-shadow: 0 0 10px var(--primary);
     }
 
-    .share-box {
-      margin: 0 auto 18px;
-      width: min(100%, 420px);
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(56, 189, 248, 0.35);
-      background: rgba(8, 28, 40, 0.72);
-      text-align: left;
-      animation: fade-in 0.7s ease-out 0.1s both;
-    }
-
-    .share-box strong {
-      display: block;
-      margin-bottom: 6px;
-      color: #7dd3fc;
-      font-size: 0.78rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-
-    .share-box p {
-      margin: 0 0 8px;
-      color: var(--muted);
-      font-size: 0.84rem;
-      line-height: 1.55;
-    }
-
-    .share-box a {
-      color: #eaf8f0;
-      font-size: 0.86rem;
-      word-break: break-all;
-    }
-
-    .share-box.workers-only {
-      border-color: rgba(251, 191, 36, 0.45);
-      background: rgba(40, 30, 8, 0.75);
-    }
-
-    .share-box.workers-only strong {
-      color: #fbbf24;
-    }
-
     .title-block {
       margin: 0 0 22px;
       padding: 4px 8px 10px;
@@ -755,12 +713,6 @@
         </h1>
       </div>
 
-      <div class="share-box" id="share-box">
-        <strong>ကျောင်းသားများ ပေးရမည့် လင့်</strong>
-        <p>ဖုန်း mobile data ဖြင့် timeout မဖြစ်စေရန် ဤလင့်ကို သုံးပါ။</p>
-        <a href="https://mthhan.github.io/Agro_Data_Collection_App/">https://mthhan.github.io/Agro_Data_Collection_App/</a>
-      </div>
-
       <div class="downloads">
         <a
           id="download-apk"
@@ -880,26 +832,6 @@
 
   <script>
     (function () {
-      var PAGES_URL = "https://mthhan.github.io/Agro_Data_Collection_App/";
-      var shareBox = document.getElementById("share-box");
-      var onWorkers = /\.workers\.dev$/i.test(location.hostname);
-
-      // If someone opened the Cloudflare URL, steer phones to GitHub Pages.
-      if (onWorkers && shareBox) {
-        shareBox.classList.add("workers-only");
-        shareBox.querySelector("strong").textContent = "ဖုန်းသုံးသူများ သတိပြုရန်";
-        shareBox.querySelector("p").textContent =
-          "workers.dev သည် mobile data တွင် timeout ဖြစ်တတ်သည်။ ကျောင်းသားများကို အောက်ပါ GitHub Pages လင့်ကိုသာ ပေးပါ။";
-        if (/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) {
-          // Soft hint only if page already loaded; hard redirect can loop on flaky nets.
-          var tip = document.createElement("p");
-          tip.style.marginTop = "8px";
-          tip.innerHTML =
-            '<a href="' + PAGES_URL + '">GitHub Pages သို့ ယခု သွားရန်</a>';
-          shareBox.appendChild(tip);
-        }
-      }
-
       var host = document.getElementById("bg-nodes");
       var stage = document.querySelector(".bg-stage");
       var reduceMotion =
