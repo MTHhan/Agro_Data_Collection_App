@@ -2,7 +2,9 @@
 <html lang="my">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="MobileOptimized" content="width">
   <meta name="description" content="Agri Data Collection App — Myanmar field data collection for AI crop model training (Android + Windows)">
   <title>Agri Data Collection App — Download</title>
   <style>
@@ -21,11 +23,16 @@
       box-sizing: border-box;
     }
 
+    html {
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
     html,
     body {
       margin: 0;
       min-height: 100%;
-      overflow-x: clip;
+      overflow-x: hidden;
       overflow-y: visible;
     }
 
@@ -33,8 +40,7 @@
       font-family: "Segoe UI", "Myanmar Text", "Noto Sans Myanmar", "Padauk", system-ui, sans-serif;
       color: var(--text);
       background: var(--bg);
-      /* overflow-x:hidden on body can clip glyph descenders in some browsers */
-      overflow-x: clip;
+      overflow-x: hidden;
       overflow-y: visible;
       line-height: 1.6;
     }
@@ -42,14 +48,25 @@
     .scene {
       position: relative;
       min-height: 100vh;
-      min-height: 100dvh;
       display: flex;
       align-items: flex-start;
       justify-content: center;
-      padding: max(24px, env(safe-area-inset-top)) 16px max(32px, env(safe-area-inset-bottom));
+      padding: 24px 16px 32px;
       isolation: isolate;
-      overflow-x: clip;
+      overflow-x: hidden;
       overflow-y: visible;
+    }
+
+    @supports (min-height: 100dvh) {
+      .scene {
+        min-height: 100dvh;
+      }
+    }
+
+    @supports (padding: max(0px)) {
+      .scene {
+        padding: max(24px, env(safe-area-inset-top)) 16px max(32px, env(safe-area-inset-bottom));
+      }
     }
 
     @media (min-width: 721px) {
@@ -85,21 +102,23 @@
       position: absolute;
       left: 50%;
       top: 42%;
-      /* vmin keeps size stable across phone widths/heights */
-      width: min(62vmin, 520px);
-      height: min(62vmin, 520px);
-      max-width: 85vw;
-      max-height: 55vh;
+      /* Plain px first — Mi Browser often drops min()/vmin/clamp */
+      width: 280px;
+      height: 280px;
+      max-width: 280px;
+      max-height: 280px;
       transform: translate(-50%, -50%);
       opacity: 0.55;
       z-index: 0;
-      contain: layout paint;
       pointer-events: none;
+      overflow: hidden;
     }
 
     .bg-brain svg {
-      width: 100%;
-      height: 100%;
+      width: 280px;
+      height: 280px;
+      max-width: 100%;
+      max-height: 100%;
       display: block;
       animation: brain-pulse 6s ease-in-out infinite;
     }
@@ -193,23 +212,31 @@
     }
 
     .brand-mark {
-      width: clamp(56px, 14vw, 88px);
-      height: clamp(56px, 14vw, 88px);
+      /* inline-grid: if width is ignored, still won't stretch full screen (Mi Browser) */
+      display: inline-grid;
+      place-items: center;
+      width: 72px;
+      height: 72px;
+      max-width: 72px;
+      max-height: 72px;
       margin: 0 auto 12px;
-      border-radius: clamp(16px, 4vw, 22px);
+      border-radius: 20px;
       border: 1px solid var(--line);
       background:
         linear-gradient(145deg, rgba(62, 207, 142, 0.28), rgba(12, 28, 20, 0.92));
-      display: grid;
-      place-items: center;
       position: relative;
       flex-shrink: 0;
+      vertical-align: top;
+      overflow: hidden;
       animation: pulse-ring 3.2s ease-in-out infinite;
     }
 
     .brand-mark svg {
-      width: clamp(28px, 7vw, 44px);
-      height: clamp(28px, 7vw, 44px);
+      width: 36px;
+      height: 36px;
+      max-width: 36px;
+      max-height: 36px;
+      display: block;
       color: var(--primary);
     }
 
@@ -252,6 +279,7 @@
       width: 100%;
       max-width: 100%;
       font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 1.75rem;
       font-size: clamp(1.55rem, 7.2vw, 2.75rem);
       font-weight: 700;
       letter-spacing: -0.03em;
@@ -538,16 +566,21 @@
 
     @media (max-width: 720px) {
       .scene {
-        padding: max(16px, env(safe-area-inset-top)) 14px max(24px, env(safe-area-inset-bottom));
+        padding: 16px 14px 24px;
       }
 
       .bg-brain {
-        width: min(46vmin, 220px);
-        height: min(46vmin, 220px);
-        max-width: 58vw;
-        max-height: 32vh;
+        width: 180px;
+        height: 180px;
+        max-width: 180px;
+        max-height: 180px;
         top: 22%;
         opacity: 0.38;
+      }
+
+      .bg-brain svg {
+        width: 180px;
+        height: 180px;
       }
 
       .bg-stage::before {
@@ -572,15 +605,19 @@
       }
 
       .brand-mark {
-        width: clamp(52px, 13vw, 72px);
-        height: clamp(52px, 13vw, 72px);
+        width: 64px;
+        height: 64px;
+        max-width: 64px;
+        max-height: 64px;
         margin-bottom: 10px;
         border-radius: 18px;
       }
 
       .brand-mark svg {
-        width: clamp(26px, 6.5vw, 36px);
-        height: clamp(26px, 6.5vw, 36px);
+        width: 32px;
+        height: 32px;
+        max-width: 32px;
+        max-height: 32px;
       }
 
       .title-block {
@@ -590,7 +627,7 @@
       }
 
       .title-block .brand-title {
-        font-size: clamp(1.35rem, 6.5vw, 1.85rem);
+        font-size: 1.55rem;
         line-height: 1.28;
       }
 
@@ -632,29 +669,37 @@
       }
 
       .downloads {
-        width: min(100%, 300px);
+        width: 100%;
+        max-width: 300px;
       }
 
       .cta {
         min-height: 46px;
         padding: 12px 14px;
-        font-size: clamp(0.84rem, 3.4vw, 0.92rem);
+        font-size: 0.9rem;
       }
     }
 
     @media (max-width: 420px) {
       .bg-brain {
-        width: min(40vmin, 168px);
-        height: min(40vmin, 168px);
-        max-width: 48vw;
-        max-height: 26vh;
+        width: 140px;
+        height: 140px;
+        max-width: 140px;
+        max-height: 140px;
         top: 18%;
         opacity: 0.32;
+      }
+
+      .bg-brain svg {
+        width: 140px;
+        height: 140px;
       }
 
       .brand-mark {
         width: 52px;
         height: 52px;
+        max-width: 52px;
+        max-height: 52px;
         border-radius: 16px;
         margin-bottom: 8px;
       }
@@ -662,10 +707,12 @@
       .brand-mark svg {
         width: 26px;
         height: 26px;
+        max-width: 26px;
+        max-height: 26px;
       }
 
       .title-block .brand-title {
-        font-size: clamp(1.25rem, 7vw, 1.55rem);
+        font-size: 1.35rem;
       }
 
       .steps {
@@ -707,19 +754,30 @@
       }
 
       .bg-brain {
-        width: min(36vmin, 140px);
-        height: min(36vmin, 140px);
+        width: 120px;
+        height: 120px;
+        max-width: 120px;
+        max-height: 120px;
         opacity: 0.28;
+      }
+
+      .bg-brain svg {
+        width: 120px;
+        height: 120px;
       }
 
       .brand-mark {
         width: 48px;
         height: 48px;
+        max-width: 48px;
+        max-height: 48px;
       }
 
       .brand-mark svg {
         width: 24px;
         height: 24px;
+        max-width: 24px;
+        max-height: 24px;
       }
 
       .title-block .brand-title {
@@ -728,23 +786,39 @@
 
       .downloads {
         width: 100%;
+        max-width: 100%;
       }
     }
 
     /* Short screens / landscape phones — keep hero compact */
     @media (max-height: 560px) {
       .bg-brain {
-        width: min(34vmin, 160px);
-        height: min(34vmin, 160px);
-        max-height: 28vh;
+        width: 120px;
+        height: 120px;
+        max-width: 120px;
+        max-height: 120px;
         top: 30%;
         opacity: 0.28;
+      }
+
+      .bg-brain svg {
+        width: 120px;
+        height: 120px;
       }
 
       .brand-mark {
         width: 48px;
         height: 48px;
+        max-width: 48px;
+        max-height: 48px;
         margin-bottom: 8px;
+      }
+
+      .brand-mark svg {
+        width: 24px;
+        height: 24px;
+        max-width: 24px;
+        max-height: 24px;
       }
 
       .title-block {
@@ -752,16 +826,37 @@
       }
 
       .title-block .brand-title {
-        font-size: clamp(1.2rem, 5vh, 1.6rem);
+        font-size: 1.3rem;
       }
     }
 
     @media (min-width: 721px) {
       .bg-brain {
-        width: min(58vmin, 480px);
-        height: min(58vmin, 480px);
-        max-height: 60vh;
+        width: 360px;
+        height: 360px;
+        max-width: 360px;
+        max-height: 360px;
         opacity: 0.62;
+      }
+
+      .bg-brain svg {
+        width: 360px;
+        height: 360px;
+      }
+
+      .brand-mark {
+        width: 88px;
+        height: 88px;
+        max-width: 88px;
+        max-height: 88px;
+        border-radius: 22px;
+      }
+
+      .brand-mark svg {
+        width: 44px;
+        height: 44px;
+        max-width: 44px;
+        max-height: 44px;
       }
     }
 
@@ -783,7 +878,7 @@
   <div class="scene">
     <div class="bg-stage" aria-hidden="true">
       <div class="bg-brain">
-        <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="280" height="280" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
           <defs>
             <filter id="brainGlow" x="-20%" y="-20%" width="140%" height="140%">
               <feGaussianBlur stdDeviation="1.8" result="blur"/>
@@ -837,7 +932,7 @@
 
     <main class="shell">
       <div class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" focusable="false">
           <path d="M12 3c-2.8 3.2-4.2 6-4.2 8.4a4.2 4.2 0 0 0 8.4 0C16.2 9 14.8 6.2 12 3Z"/>
           <path d="M12 11.5v9"/>
           <path d="M8.5 16.5c1.2.9 2.4 1.3 3.5 1.3s2.3-.4 3.5-1.3"/>
@@ -971,6 +1066,59 @@
 
   <script>
     (function () {
+      // Mi Browser / WebView: clamp/min/vw can fail and stretch block SVGs full-width.
+      (function hardenLogoSizes() {
+        var mark = document.querySelector(".brand-mark");
+        var markSvg = mark && mark.querySelector("svg");
+        var brain = document.querySelector(".bg-brain");
+        var brainSvg = brain && brain.querySelector("svg");
+        var w = Math.min(window.innerWidth || 360, document.documentElement.clientWidth || 360);
+        var markSize = w >= 721 ? 88 : w <= 360 ? 48 : w <= 420 ? 52 : 64;
+        var iconSize = Math.round(markSize * 0.5);
+        var brainSize = w >= 721 ? 360 : w <= 360 ? 120 : w <= 420 ? 140 : 180;
+
+        if (mark) {
+          mark.style.cssText =
+            "display:inline-grid;place-items:center;width:" +
+            markSize +
+            "px;height:" +
+            markSize +
+            "px;max-width:" +
+            markSize +
+            "px;max-height:" +
+            markSize +
+            "px;margin:0 auto 12px;overflow:hidden;";
+        }
+        if (markSvg) {
+          markSvg.setAttribute("width", String(iconSize));
+          markSvg.setAttribute("height", String(iconSize));
+          markSvg.style.cssText =
+            "width:" + iconSize + "px;height:" + iconSize + "px;max-width:" + iconSize + "px;max-height:" + iconSize + "px;display:block;";
+        }
+        if (brain) {
+          brain.style.cssText =
+            "position:absolute;left:50%;top:22%;width:" +
+            brainSize +
+            "px;height:" +
+            brainSize +
+            "px;max-width:" +
+            brainSize +
+            "px;max-height:" +
+            brainSize +
+            "px;transform:translate(-50%,-50%);opacity:0.38;z-index:0;pointer-events:none;overflow:hidden;";
+          if (w >= 721) {
+            brain.style.top = "42%";
+            brain.style.opacity = "0.62";
+          }
+        }
+        if (brainSvg) {
+          brainSvg.setAttribute("width", String(brainSize));
+          brainSvg.setAttribute("height", String(brainSize));
+          brainSvg.style.cssText =
+            "width:" + brainSize + "px;height:" + brainSize + "px;max-width:100%;max-height:100%;display:block;";
+        }
+      })();
+
       var host = document.getElementById("bg-nodes");
       var stage = document.querySelector(".bg-stage");
       var reduceMotion =
