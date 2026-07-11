@@ -84,13 +84,17 @@
     .bg-brain {
       position: absolute;
       left: 50%;
-      top: 46%;
-      width: min(92vw, 680px);
-      height: min(92vw, 680px);
+      top: 42%;
+      /* vmin keeps size stable across phone widths/heights */
+      width: min(62vmin, 520px);
+      height: min(62vmin, 520px);
+      max-width: 85vw;
+      max-height: 55vh;
       transform: translate(-50%, -50%);
-      opacity: 0.88;
+      opacity: 0.55;
       z-index: 0;
       contain: layout paint;
+      pointer-events: none;
     }
 
     .bg-brain svg {
@@ -189,22 +193,23 @@
     }
 
     .brand-mark {
-      width: clamp(84px, 22vw, 104px);
-      height: clamp(84px, 22vw, 104px);
-      margin: 0 auto 16px;
-      border-radius: 26px;
+      width: clamp(56px, 14vw, 88px);
+      height: clamp(56px, 14vw, 88px);
+      margin: 0 auto 12px;
+      border-radius: clamp(16px, 4vw, 22px);
       border: 1px solid var(--line);
       background:
         linear-gradient(145deg, rgba(62, 207, 142, 0.28), rgba(12, 28, 20, 0.92));
       display: grid;
       place-items: center;
       position: relative;
+      flex-shrink: 0;
       animation: pulse-ring 3.2s ease-in-out infinite;
     }
 
     .brand-mark svg {
-      width: clamp(40px, 11vw, 52px);
-      height: clamp(40px, 11vw, 52px);
+      width: clamp(28px, 7vw, 44px);
+      height: clamp(28px, 7vw, 44px);
       color: var(--primary);
     }
 
@@ -532,29 +537,70 @@
     }
 
     @media (max-width: 720px) {
+      .scene {
+        padding: max(16px, env(safe-area-inset-top)) 14px max(24px, env(safe-area-inset-bottom));
+      }
+
       .bg-brain {
-        width: min(120vw, 520px);
-        height: min(120vw, 520px);
-        top: 38%;
-        opacity: 0.72;
+        width: min(46vmin, 220px);
+        height: min(46vmin, 220px);
+        max-width: 58vw;
+        max-height: 32vh;
+        top: 22%;
+        opacity: 0.38;
+      }
+
+      .bg-stage::before {
+        background-size: 22px 22px;
+        opacity: 0.1;
+      }
+
+      .data-node {
+        width: 24px;
+        height: 24px;
+        border-radius: 8px;
+      }
+
+      .data-node svg {
+        width: 13px;
+        height: 13px;
+      }
+
+      .shell {
+        max-width: 100%;
+        padding: 4px 0 4px;
+      }
+
+      .brand-mark {
+        width: clamp(52px, 13vw, 72px);
+        height: clamp(52px, 13vw, 72px);
+        margin-bottom: 10px;
+        border-radius: 18px;
+      }
+
+      .brand-mark svg {
+        width: clamp(26px, 6.5vw, 36px);
+        height: clamp(26px, 6.5vw, 36px);
       }
 
       .title-block {
+        margin-bottom: 16px;
         padding-left: 4px;
         padding-right: 4px;
       }
 
       .title-block .brand-title {
-        font-size: clamp(1.45rem, 8vw, 2rem);
-        line-height: 1.3;
+        font-size: clamp(1.35rem, 6.5vw, 1.85rem);
+        line-height: 1.28;
       }
 
       .eyebrow {
-        font-size: 0.68rem;
+        font-size: 0.65rem;
         padding: 5px 10px;
         max-width: 100%;
         flex-wrap: wrap;
         justify-content: center;
+        margin-bottom: 10px;
       }
 
       .fold-toggle {
@@ -588,9 +634,40 @@
       .downloads {
         width: min(100%, 300px);
       }
+
+      .cta {
+        min-height: 46px;
+        padding: 12px 14px;
+        font-size: clamp(0.84rem, 3.4vw, 0.92rem);
+      }
     }
 
     @media (max-width: 420px) {
+      .bg-brain {
+        width: min(40vmin, 168px);
+        height: min(40vmin, 168px);
+        max-width: 48vw;
+        max-height: 26vh;
+        top: 18%;
+        opacity: 0.32;
+      }
+
+      .brand-mark {
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        margin-bottom: 8px;
+      }
+
+      .brand-mark svg {
+        width: 26px;
+        height: 26px;
+      }
+
+      .title-block .brand-title {
+        font-size: clamp(1.25rem, 7vw, 1.55rem);
+      }
+
       .steps {
         grid-template-columns: 1fr;
       }
@@ -611,18 +688,80 @@
       }
 
       .data-node {
-        width: 28px;
-        height: 28px;
-        border-radius: 9px;
+        width: 20px;
+        height: 20px;
+        border-radius: 7px;
       }
 
       .data-node svg {
-        width: 14px;
-        height: 14px;
+        width: 11px;
+        height: 11px;
+      }
+    }
+
+    /* Very small / narrow phones */
+    @media (max-width: 360px) {
+      .scene {
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+
+      .bg-brain {
+        width: min(36vmin, 140px);
+        height: min(36vmin, 140px);
+        opacity: 0.28;
       }
 
       .brand-mark {
-        border-radius: 22px;
+        width: 48px;
+        height: 48px;
+      }
+
+      .brand-mark svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .title-block .brand-title {
+        font-size: 1.2rem;
+      }
+
+      .downloads {
+        width: 100%;
+      }
+    }
+
+    /* Short screens / landscape phones — keep hero compact */
+    @media (max-height: 560px) {
+      .bg-brain {
+        width: min(34vmin, 160px);
+        height: min(34vmin, 160px);
+        max-height: 28vh;
+        top: 30%;
+        opacity: 0.28;
+      }
+
+      .brand-mark {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 8px;
+      }
+
+      .title-block {
+        margin-bottom: 12px;
+      }
+
+      .title-block .brand-title {
+        font-size: clamp(1.2rem, 5vh, 1.6rem);
+      }
+    }
+
+    @media (min-width: 721px) {
+      .bg-brain {
+        width: min(58vmin, 480px);
+        height: min(58vmin, 480px);
+        max-height: 60vh;
+        opacity: 0.62;
       }
     }
 
