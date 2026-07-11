@@ -206,6 +206,20 @@
       animation: fade-in 0.7s ease-out both;
     }
 
+    .hero-head {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-head::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
     @keyframes pulse-ring {
       0%,
       100% {
@@ -217,8 +231,8 @@
     }
 
     .brand-mark {
-      /* inline-block: Mi Browser often ignores grid and stretches inline SVG full-width */
-      display: inline-block;
+      /* block + auto margins: Mi Browser puts inline-block next to inline-flex text */
+      display: block;
       width: 72px;
       height: 72px;
       max-width: 72px;
@@ -250,10 +264,19 @@
     }
 
     .eyebrow {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      margin: 0 auto 14px;
+      text-align: center;
+      animation: fade-in 0.7s ease-out 0.08s both;
+    }
+
+    .eyebrow-inner {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin: 0 0 14px;
+      max-width: 100%;
       padding: 6px 12px;
       border-radius: 999px;
       border: 1px solid var(--line);
@@ -263,10 +286,10 @@
       font-weight: 600;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      animation: fade-in 0.7s ease-out 0.08s both;
+      vertical-align: top;
     }
 
-    .eyebrow::before {
+    .eyebrow-inner::before {
       content: "";
       width: 7px;
       height: 7px;
@@ -276,6 +299,8 @@
     }
 
     .title-block {
+      display: block;
+      clear: both;
       margin: 0 0 22px;
       padding: 4px 8px 10px;
       overflow: visible;
@@ -642,12 +667,15 @@
       }
 
       .eyebrow {
+        margin-bottom: 10px;
+      }
+
+      .eyebrow-inner {
         font-size: 0.65rem;
         padding: 5px 10px;
         max-width: 100%;
         flex-wrap: wrap;
         justify-content: center;
-        margin-bottom: 10px;
       }
 
       .fold-toggle {
@@ -945,10 +973,11 @@
     </div>
 
     <main class="shell">
+      <header class="hero-head">
       <div
         class="brand-mark"
         aria-hidden="true"
-        style="display:inline-block;width:64px;height:64px;max-width:64px;max-height:64px;line-height:0;font-size:0;overflow:hidden;"
+        style="display:block;width:64px;height:64px;max-width:64px;max-height:64px;margin:0 auto 12px;line-height:0;font-size:0;overflow:hidden;"
       >
         <img
           class="brand-mark-img"
@@ -961,13 +990,14 @@
         />
       </div>
 
-      <p class="eyebrow">Field data for AI training</p>
+      <p class="eyebrow"><span class="eyebrow-inner">Field data for AI training</span></p>
       <div class="title-block">
         <h1 class="brand-title">
           <span class="line">Agri Data</span>
           <span class="line">Collection App</span>
         </h1>
       </div>
+      </header>
 
       <div class="downloads">
         <a
@@ -1115,7 +1145,7 @@
 
         if (mark) {
           mark.style.cssText =
-            "display:inline-block;width:" +
+            "display:block;width:" +
             markSize +
             "px;height:" +
             markSize +
