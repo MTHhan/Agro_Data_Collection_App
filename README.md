@@ -18,13 +18,4 @@ https://mthhan.github.io/Agro_Data_Collection_App/
 | Android APK တိုက်ရိုက် | https://github.com/MTHhan/Agro_Data_Collection_App/releases/download/v1.0.0/Agro.Data.apk |
 | Windows EXE တိုက်ရိုက် | https://github.com/MTHhan/Agro_Data_Collection_App/releases/download/v1.0.0/Agro_Data_Desktop.exe |
 
-## Website update
 
-```powershell
-cd D:\New_Data_Collect\Agro_Data_Collection_App
-git add website/index.html
-git commit -m "Update website"
-git push origin main
-```
-
-Push ပြီးရင် GitHub Pages က auto-deploy လုပ်ပါမည်။
