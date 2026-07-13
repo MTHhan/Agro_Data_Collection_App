@@ -2,16 +2,15 @@
 
 Myanmar field data collection apps (Android + Windows) for AI training datasets.
 
-## ကျောင်းသားများကို ပေးရမည့် လင့် (အဓိက)
+## ကျောင်းသားများအတွက် လင့် (အဓိက)
 
-**ဖုန်း + ကွန်ပျူတာ အားလုံးအတွက် ဤလင့်ကိုသာ ပေးပါ:**
+**ဖုန်း + ကွန်ပျူတာ အားလုံးအတွက်:**
 
 ```text
 https://mthhan.github.io/Agro_Data_Collection_App/
 ```
 
-> `*.workers.dev` ကို မပေးပါနှင့် — မြန်မာ mobile data တွင် Connection timeout ဖြစ်တတ်သည်။
-
+>
 | အသုံး | လင့် |
 |------|------|
 | ကျောင်းသားများ (အဓိက) | https://mthhan.github.io/Agro_Data_Collection_App/ |
