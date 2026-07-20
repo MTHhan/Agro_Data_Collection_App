@@ -38,7 +38,9 @@
 
     body {
       font-family: "Segoe UI", "Myanmar Text", "Noto Sans Myanmar", "Padauk", system-ui, sans-serif;
+      color: #e8f5ee;
       color: var(--text);
+      background: #07110c;
       background: var(--bg);
       overflow-x: hidden;
       overflow-y: visible;
@@ -52,9 +54,9 @@
       align-items: flex-start;
       justify-content: center;
       padding: 24px 16px 32px;
-      isolation: isolate;
       overflow-x: hidden;
       overflow-y: visible;
+      z-index: 0;
     }
 
     @supports (min-height: 100dvh) {
@@ -82,7 +84,7 @@
       right: 0;
       bottom: 0;
       left: 0;
-      z-index: -2;
+      z-index: 0;
       pointer-events: none;
       overflow: hidden;
       background:
@@ -207,13 +209,14 @@
       max-width: 560px;
       text-align: center;
       position: relative;
-      z-index: 1;
+      z-index: 2;
       padding: 12px 0 8px;
       background: transparent;
       border: 0;
       backdrop-filter: none;
       box-shadow: none;
-      animation: fade-in 0.7s ease-out both;
+      opacity: 1;
+      visibility: visible;
     }
 
     .hero-head {
@@ -296,7 +299,8 @@
       margin: 0 auto 14px;
       clear: both;
       text-align: center;
-      animation: fade-in 0.7s ease-out 0.08s both;
+      opacity: 1;
+      visibility: visible;
     }
 
     .eyebrow-inner {
@@ -363,7 +367,6 @@
       line-height: 1.25;
       color: #eaf8f0;
       overflow: visible;
-      word-wrap: break-word;
       overflow-wrap: anywhere;
       hyphens: auto;
     }
@@ -378,8 +381,9 @@
       width: 100%;
       max-width: 320px;
       position: relative;
-      z-index: 0;
-      animation: fade-in 0.7s ease-out 0.3s both;
+      z-index: 2;
+      opacity: 1;
+      visibility: visible;
     }
 
     .downloads .cta {
@@ -459,15 +463,6 @@
       border: 0;
     }
 
-    @keyframes fade-in {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-
     .cta.secondary {
       background: linear-gradient(
         135deg,
@@ -514,10 +509,12 @@
     .meta {
       margin: 14px 0 0;
       min-height: 1.4em;
+      color: #8aa899;
       color: var(--muted);
       font-size: 0.88rem;
       line-height: 1.65;
-      animation: fade-in 0.7s ease-out 0.36s both;
+      opacity: 1;
+      visibility: visible;
     }
 
     .meta + .meta {
@@ -527,12 +524,14 @@
     .fallback {
       display: inline-block;
       margin-top: 12px;
+      color: #5eead4;
       color: var(--accent);
       font-size: 0.84rem;
       text-decoration: none;
       border-bottom: 1px solid transparent;
       transition: border-color 0.15s ease;
-      animation: fade-in 0.7s ease-out 0.4s both;
+      opacity: 1;
+      visibility: visible;
     }
 
     .fallback:hover {
@@ -546,11 +545,10 @@
       background: rgba(12, 28, 20, 0.88);
       text-align: left;
       overflow: hidden;
-      animation: fade-in 0.7s ease-out 0.46s both;
-    }
-
-    .fold + .fold {
-      animation-delay: 0.5s;
+      opacity: 1;
+      visibility: visible;
+      position: relative;
+      z-index: 2;
     }
 
     .fold-toggle {
@@ -1199,6 +1197,7 @@
 
   <script>
     (function () {
+      try {
       // Mi Browser / WebView: clamp/min/vw and inline SVG can stretch full-width.
       function layoutWidth() {
         var cw = document.documentElement.clientWidth || 0;
@@ -1236,7 +1235,7 @@
             markSize +
             "px;margin:0 auto 12px;overflow:hidden;line-height:0;font-size:0;padding-top:" +
             iconPad +
-            "px;text-align:center;";
+            "px;text-align:center;opacity:1;visibility:visible;";
         }
         if (markImg) {
           markImg.setAttribute("width", String(iconSize));
@@ -1277,19 +1276,26 @@
       }
 
       hardenLogoSizes();
-      window.addEventListener("resize", hardenLogoSizes, { passive: true });
-      window.addEventListener("orientationchange", function () {
-        setTimeout(hardenLogoSizes, 180);
-      });
-      if (window.visualViewport) {
-        window.visualViewport.addEventListener("resize", hardenLogoSizes, { passive: true });
+      if (window.addEventListener) {
+        window.addEventListener("resize", hardenLogoSizes);
+        window.addEventListener("orientationchange", function () {
+          setTimeout(hardenLogoSizes, 180);
+        });
+        if (window.visualViewport && window.visualViewport.addEventListener) {
+          window.visualViewport.addEventListener("resize", hardenLogoSizes);
+        }
       }
 
       var host = document.getElementById("bg-nodes");
       var stage = document.querySelector(".bg-stage");
-      var reduceMotion =
-        window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
-        window.matchMedia("(max-width: 720px)").matches;
+      var reduceMotion = false;
+      try {
+        reduceMotion =
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+          window.matchMedia("(max-width: 720px)").matches;
+      } catch (e) {
+        reduceMotion = true;
+      }
 
       if (host && !reduceMotion) {
         var icons = [
@@ -1327,9 +1333,10 @@
 
       function setAnimPaused(paused) {
         if (!stage) return;
-        stage.querySelectorAll(".data-node, .bg-brain svg").forEach(function (el) {
-          el.style.animationPlayState = paused ? "paused" : "running";
-        });
+        var els = stage.querySelectorAll(".data-node, .bg-brain svg");
+        for (var i = 0; i < els.length; i++) {
+          els[i].style.animationPlayState = paused ? "paused" : "running";
+        }
       }
 
       document.addEventListener("visibilitychange", function () {
@@ -1361,6 +1368,9 @@
         document.getElementById("install-toggle"),
         document.getElementById("install-panel")
       );
+      } catch (err) {
+        /* Keep page visible even if enhancement script fails */
+      }
     })();
   </script>
 </body>
